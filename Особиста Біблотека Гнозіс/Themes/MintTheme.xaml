@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="PrimaryHue" Color="#2ECC71"/>
+
+    <SolidColorBrush x:Key="BackgroundHue" Color="#EBFAF2"/>
+
+    <SolidColorBrush x:Key="TextHue" Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="MenuHoverColor" Color="#27AE60"/>
+
+</ResourceDictionary>

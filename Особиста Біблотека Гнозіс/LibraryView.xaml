@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Особиста_Біблотека_Гнозіс.LibraryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="#DDDDDD" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,5,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <TextBlock Text="📚" FontSize="28" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                <TextBlock Text="Моя бібліотека" FontSize="28" FontWeight="Bold" Foreground="#2C3E50" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Text="🔍" VerticalAlignment="Center" Margin="10,0,5,0" FontSize="18"/>
+                <TextBox x:Name="SearchBox" Width="180" Height="25" VerticalContentAlignment="Center" 
+                         TextChanged="SearchBox_TextChanged" Margin="0,0,15,0"/>
+
+                <TextBlock Text="Статус:" VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="SemiBold"/>
+                <ComboBox x:Name="StatusFilter" Width="120" Height="33" SelectionChanged="StatusFilter_SelectionChanged" VerticalContentAlignment="Center">
+                    <ComboBoxItem Content="Всі"/>
+                    <ComboBoxItem Content="В наявності"/>
+                    <ComboBoxItem Content="Віддана"/>
+                    <ComboBoxItem Content="Замовлена"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1" 
+                BorderBrush="#DDDDDD" 
+                BorderThickness="1" 
+                CornerRadius="8" 
+                Padding="0"
+                Background="White">
+
+            <DataGrid x:Name="BooksGrid" 
+                      MouseDoubleClick="BooksGrid_MouseDoubleClick"
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      Background="Transparent"
+                      BorderThickness="0" 
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="#F0F0F0">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Назва" Binding="{Binding Title}" Width="2*"/>
+                    <DataGridTextColumn Header="Автор" Binding="{Binding Author}" Width="1.5*"/>
+                    <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}" Width="*"/>
+                    <DataGridTextColumn Header="Рік" Binding="{Binding Year}" Width="0.6*"/>
+                    <DataGridTextColumn Header="Сторінок" Binding="{Binding Pages}" Width="0.7*"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="0.9*"/>
+                </DataGrid.Columns>
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Height" Value="35"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#E3F2FD"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Border>
+
+        <Button Grid.Row="2" 
+                Content="🗑️ Видалити вибрану книгу" 
+                HorizontalAlignment="Right" 
+                Margin="0,5,20,5" 
+                Padding="20,10"
+                Background="#EF5350" 
+                Foreground="White"
+                FontWeight="Bold"
+                Cursor="Hand"
+                Click="DeleteSelectedBook_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</UserControl>
